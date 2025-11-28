@@ -10,7 +10,8 @@
       "address": "12 Rue de la République, Tunis",
       "medicalHistory": "Hypertension, Diabète type 2",
       "remarks": "Allergique à la pénicilline",
-      "lastAppointment": "2025-11-20"
+      "lastAppointment": "2025-11-20",
+      "imageUrl": "images/patients/patient_male_1.png"
     },
     {
       "id": "2",
@@ -22,7 +23,8 @@
       "address": "45 Avenue Habib Bourguiba, Sfax",
       "medicalHistory": "Asthme",
       "remarks": "Suivi régulier nécessaire",
-      "lastAppointment": "2025-11-18"
+      "lastAppointment": "2025-11-18",
+      "imageUrl": "images/patients/patient_female_1.png"
     },
     {
       "id": "3",
@@ -34,7 +36,8 @@
       "address": "8 Rue Ibn Khaldoun, Sousse",
       "medicalHistory": "Aucun antécédent majeur",
       "remarks": "",
-      "lastAppointment": "2025-11-15"
+      "lastAppointment": "2025-11-15",
+      "imageUrl": "images/patients/patient_male_2.png"
     },
     {
       "id": "4",
@@ -46,7 +49,8 @@
       "address": "23 Rue de Carthage, La Marsa",
       "medicalHistory": "Migraine chronique",
       "remarks": "Éviter les aliments riches en tyramine",
-      "lastAppointment": "2025-11-22"
+      "lastAppointment": "2025-11-22",
+      "imageUrl": "images/patients/patient_female_1.png"
     },
     {
       "id": "5",
@@ -58,7 +62,8 @@
       "address": "67 Avenue de la Liberté, Bizerte",
       "medicalHistory": "Cholestérol élevé",
       "remarks": "Régime alimentaire en cours",
-      "lastAppointment": "2025-11-10"
+      "lastAppointment": "2025-11-10",
+      "imageUrl": "images/patients/patient_male_1.png"
     }
   ],
   "appointments": [

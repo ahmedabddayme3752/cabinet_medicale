@@ -9,4 +9,5 @@ export interface Patient {
     medicalHistory?: string;
     remarks?: string;
     lastAppointment?: string;
+    imageUrl?: string;
 }

@@ -1,6 +1,6 @@
 .appointment-list-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
     padding-bottom: 3rem;
 }
 
@@ -15,12 +15,12 @@
 .page-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #2d3748;
+    color: #1e293b;
     display: flex;
     align-items: center;
 
     i {
-        color: #667eea;
+        color: #0891b2;
     }
 }
 
@@ -28,14 +28,14 @@
     padding: 0.75rem 1.5rem;
     font-weight: 600;
     border-radius: 12px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
     border: none;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 15px rgba(8, 145, 178, 0.4);
     transition: all 0.3s ease;
 
     &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        box-shadow: 0 6px 20px rgba(8, 145, 178, 0.6);
     }
 }
 
@@ -70,12 +70,12 @@
 .appointment-patient {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #2d3748;
+    color: #1e293b;
     margin-bottom: 0.25rem;
 }
 
 .appointment-date {
-    color: #718096;
+    color: #64748b;
     margin-bottom: 0;
 }
 
@@ -84,13 +84,13 @@
 }
 
 .appointment-reason {
-    color: #4a5568;
+    color: #475569;
     margin-bottom: 0.5rem;
 }
 
 .appointment-notes {
     font-size: 0.9rem;
-    color: #718096;
+    color: #64748b;
     font-style: italic;
 }
 

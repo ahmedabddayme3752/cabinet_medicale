@@ -8,12 +8,12 @@
 
 .form-label {
     font-weight: 600;
-    color: #2d3748;
+    color: #1e293b;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
 
     i {
-        color: #667eea;
+        color: #0891b2;
     }
 }
 
@@ -26,16 +26,16 @@
     font-size: 0.95rem;
 
     &:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        border-color: #0891b2;
+        box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
     }
 }
 
 .btn-clear {
     padding: 0.65rem 1rem;
-    background: #f7fafc;
+    background: #f8fafc;
     border: 2px solid #e2e8f0;
-    color: #4a5568;
+    color: #475569;
     border-radius: 8px;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -43,7 +43,7 @@
     &:hover {
         background: #edf2f7;
         border-color: #cbd5e0;
-        color: #2d3748;
+        color: #1e293b;
     }
 }
 

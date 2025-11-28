@@ -22,7 +22,10 @@
             <div class="patient-header-info">
                 <div class="patient-avatar-large" [class.male]="patient.gender === 'M'"
                     [class.female]="patient.gender === 'F'">
-                    <i class="bi bi-person-fill"></i>
+                    <img *ngIf="patient.imageUrl" [src]="patient.imageUrl"
+                        [alt]="patient.firstName + ' ' + patient.lastName"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    <i *ngIf="!patient.imageUrl" class="bi bi-person-fill"></i>
                 </div>
                 <div>
                     <h1 class="patient-name-large">{{ patient.firstName }} {{ patient.lastName }}</h1>

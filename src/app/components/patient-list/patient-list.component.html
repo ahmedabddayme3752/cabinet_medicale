@@ -51,7 +51,10 @@
                     <div class="patient-card-header">
                         <div class="patient-avatar" [class.male]="patient.gender === 'M'"
                             [class.female]="patient.gender === 'F'">
-                            <i class="bi" [ngClass]="patient.gender === 'M' ? 'bi-person-fill' : 'bi-person-fill'"></i>
+                            <img *ngIf="patient.imageUrl" [src]="patient.imageUrl"
+                                [alt]="patient.firstName + ' ' + patient.lastName">
+                            <i *ngIf="!patient.imageUrl" class="bi"
+                                [ngClass]="patient.gender === 'M' ? 'bi-person-fill' : 'bi-person-fill'"></i>
                         </div>
                         <div class="patient-info">
                             <h3 class="patient-name">{{ patient.firstName }} {{ patient.lastName }}</h3>

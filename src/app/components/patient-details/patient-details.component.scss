@@ -1,6 +1,6 @@
 .patient-details-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
     padding: 2rem 0 3rem;
 }
 
@@ -18,9 +18,9 @@
 }
 
 .btn-back {
-    background: #f7fafc;
+    background: #f8fafc;
     border: 2px solid #e2e8f0;
-    color: #4a5568;
+    color: #475569;
     padding: 0.5rem 1rem;
     border-radius: 8px;
     font-weight: 600;
@@ -29,7 +29,7 @@
 
     &:hover {
         background: #edf2f7;
-        color: #2d3748;
+        color: #1e293b;
     }
 }
 
@@ -62,18 +62,18 @@
 .patient-name-large {
     font-size: 2rem;
     font-weight: 700;
-    color: #2d3748;
+    color: #1e293b;
     margin-bottom: 0.25rem;
 }
 
 .patient-meta {
-    color: #718096;
+    color: #64748b;
     font-size: 1.1rem;
     margin-bottom: 0;
 }
 
 .btn-edit {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
     color: white;
     padding: 0.75rem 1.5rem;
     border-radius: 10px;
@@ -83,7 +83,7 @@
 
     &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        box-shadow: 0 4px 15px rgba(8, 145, 178, 0.4);
         color: white;
     }
 }
@@ -99,13 +99,13 @@
 .card-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #2d3748;
+    color: #1e293b;
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid #e2e8f0;
 
     i {
-        color: #667eea;
+        color: #0891b2;
     }
 }
 
@@ -122,7 +122,7 @@
 
     .label {
         font-size: 0.85rem;
-        color: #718096;
+        color: #64748b;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -130,12 +130,12 @@
 
     .value {
         font-size: 1rem;
-        color: #2d3748;
+        color: #1e293b;
         font-weight: 500;
 
         &.remarks-text {
             font-style: italic;
-            color: #4a5568;
+            color: #475569;
         }
     }
 }
@@ -161,13 +161,13 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #667eea;
+    background: #0891b2;
     border: 3px solid white;
-    box-shadow: 0 0 0 2px #667eea;
+    box-shadow: 0 0 0 2px #0891b2;
 
     &.past {
-        background: #48bb78;
-        box-shadow: 0 0 0 2px #48bb78;
+        background: #10b981;
+        box-shadow: 0 0 0 2px #10b981;
     }
 
     &::before {
@@ -187,27 +187,27 @@
 }
 
 .timeline-content {
-    background: #f7fafc;
+    background: #f8fafc;
     padding: 1.25rem;
     border-radius: 12px;
-    border-left: 3px solid #667eea;
+    border-left: 3px solid #0891b2;
 }
 
 .appointment-date {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #2d3748;
+    color: #1e293b;
     margin-bottom: 0.5rem;
 }
 
 .appointment-reason {
-    color: #4a5568;
+    color: #475569;
     margin-bottom: 0.25rem;
 }
 
 .appointment-notes {
     font-size: 0.9rem;
-    color: #718096;
+    color: #64748b;
     font-style: italic;
     margin-bottom: 0;
 }
@@ -242,10 +242,10 @@
 }
 
 .treatment-item {
-    background: #f7fafc;
+    background: #f8fafc;
     padding: 1.25rem;
     border-radius: 12px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #0891b2;
 }
 
 .treatment-header {
@@ -258,12 +258,12 @@
 .treatment-name {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #2d3748;
+    color: #1e293b;
     margin-bottom: 0;
 }
 
 .treatment-dosage {
-    background: #667eea;
+    background: #0891b2;
     color: white;
     padding: 0.35rem 0.75rem;
     border-radius: 20px;
@@ -274,7 +274,7 @@
 .treatment-details {
     p {
         margin-bottom: 0.5rem;
-        color: #4a5568;
+        color: #475569;
         font-size: 0.95rem;
 
         &:last-child {
@@ -282,13 +282,13 @@
         }
 
         strong {
-            color: #2d3748;
+            color: #1e293b;
         }
     }
 
     .treatment-notes {
         font-style: italic;
-        color: #718096;
+        color: #64748b;
         margin-top: 0.75rem;
     }
 }
@@ -296,7 +296,7 @@
 .empty-message {
     text-align: center;
     padding: 2rem;
-    color: #718096;
+    color: #64748b;
     font-style: italic;
 }
 
