@@ -1,0 +1,61 @@
+.navbar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white !important;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    i {
+        font-size: 1.8rem;
+    }
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 600;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin: 0 0.25rem;
+
+    &:hover {
+        color: white !important;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.active {
+        color: white !important;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    &.btn-add-nav {
+        background: rgba(255, 255, 255, 0.2);
+        color: white !important;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    }
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+
+    &:focus {
+        box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+    }
+}

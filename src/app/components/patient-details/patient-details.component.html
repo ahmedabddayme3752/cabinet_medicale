@@ -1,0 +1,123 @@
+<div class="patient-details-container">
+    <!-- Loading State -->
+    <div *ngIf="loading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Chargement...</span>
+        </div>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !loading" class="container">
+        <div class="alert alert-danger mt-5">{{ error }}</div>
+        <button class="btn btn-primary" (click)="goBack()">Retour</button>
+    </div>
+
+    <!-- Patient Details -->
+    <div *ngIf="patient && !loading" class="container">
+        <!-- Header -->
+        <div class="details-header">
+            <button class="btn-back" (click)="goBack()">
+                <i class="bi bi-arrow-left"></i> Retour
+            </button>
+            <div class="patient-header-info">
+                <div class="patient-avatar-large" [class.male]="patient.gender === 'M'"
+                    [class.female]="patient.gender === 'F'">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <div>
+                    <h1 class="patient-name-large">{{ patient.firstName }} {{ patient.lastName }}</h1>
+                    <p class="patient-meta">{{ getAge(patient.dateOfBirth) }} ans • {{ patient.gender === 'M' ? 'Homme'
+                        : 'Femme' }}</p>
+                </div>
+            </div>
+            <a [routerLink]="['/edit-patient', patient.id]" class="btn btn-edit">
+                <i class="bi bi-pencil-fill me-2"></i>Modifier
+            </a>
+        </div>
+
+        <div class="row g-4">
+            <!-- Patient Information Card -->
+            <div class="col-lg-4">
+                <div class="info-card">
+                    <h2 class="card-title"><i class="bi bi-person-vcard me-2"></i>Informations Personnelles</h2>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="label">Date de naissance</span>
+                            <span class="value">{{ formatDate(patient.dateOfBirth) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Téléphone</span>
+                            <span class="value">{{ patient.phone }}</span>
+                        </div>
+                        <div class="info-item" *ngIf="patient.address">
+                            <span class="label">Adresse</span>
+                            <span class="value">{{ patient.address }}</span>
+                        </div>
+                        <div class="info-item" *ngIf="patient.medicalHistory">
+                            <span class="label">Antécédents médicaux</span>
+                            <span class="value">{{ patient.medicalHistory }}</span>
+                        </div>
+                        <div class="info-item" *ngIf="patient.remarks">
+                            <span class="label">Remarques</span>
+                            <span class="value remarks-text">{{ patient.remarks }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appointments and Treatments -->
+            <div class="col-lg-8">
+                <!-- Appointments Card -->
+                <div class="info-card mb-4">
+                    <h2 class="card-title"><i class="bi bi-calendar-check me-2"></i>Rendez-vous</h2>
+                    <div *ngIf="appointments.length === 0" class="empty-message">
+                        Aucun rendez-vous enregistré
+                    </div>
+                    <div *ngIf="appointments.length > 0" class="timeline">
+                        <div *ngFor="let appointment of appointments" class="timeline-item">
+                            <div class="timeline-marker" [class.past]="isPastAppointment(appointment)"></div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h4 class="appointment-date">{{ formatDate(appointment.date) }} à {{
+                                            appointment.time }}</h4>
+                                        <p class="appointment-reason">{{ appointment.reason }}</p>
+                                        <p *ngIf="appointment.notes" class="appointment-notes">{{ appointment.notes }}
+                                        </p>
+                                    </div>
+                                    <span class="status-badge" [ngClass]="getStatusBadgeClass(appointment.status)">
+                                        {{ getStatusText(appointment.status) }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Treatments Card -->
+                <div class="info-card">
+                    <h2 class="card-title"><i class="bi bi-capsule me-2"></i>Traitements</h2>
+                    <div *ngIf="treatments.length === 0" class="empty-message">
+                        Aucun traitement prescrit
+                    </div>
+                    <div *ngIf="treatments.length > 0" class="treatment-list">
+                        <div *ngFor="let treatment of treatments" class="treatment-item">
+                            <div class="treatment-header">
+                                <h4 class="treatment-name">{{ treatment.medication }}</h4>
+                                <span class="treatment-dosage">{{ treatment.dosage }}</span>
+                            </div>
+                            <div class="treatment-details">
+                                <p><strong>Fréquence:</strong> {{ treatment.frequency }}</p>
+                                <p><strong>Prescrit par:</strong> {{ treatment.prescribedBy }}</p>
+                                <p><strong>Date de début:</strong> {{ formatDate(treatment.startDate) }}</p>
+                                <p *ngIf="treatment.endDate"><strong>Date de fin:</strong> {{
+                                    formatDate(treatment.endDate) }}</p>
+                                <p *ngIf="treatment.notes" class="treatment-notes">{{ treatment.notes }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

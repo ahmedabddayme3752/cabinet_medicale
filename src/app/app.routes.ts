@@ -1,0 +1,15 @@
+import { Routes } from '@angular/router';
+import { PatientListComponent } from './components/patient-list/patient-list.component';
+import { AddPatientComponent } from './components/add-patient/add-patient.component';
+import { EditPatientComponent } from './components/edit-patient/edit-patient.component';
+import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
+import { AppointmentListComponent } from './components/appointment-list/appointment-list.component';
+
+export const routes: Routes = [
+    { path: '', component: PatientListComponent },
+    { path: 'add-patient', component: AddPatientComponent },
+    { path: 'patient/:id', component: PatientDetailsComponent },
+    { path: 'edit-patient/:id', component: EditPatientComponent },
+    { path: 'appointments', component: AppointmentListComponent },
+    { path: '**', redirectTo: '' }
+];

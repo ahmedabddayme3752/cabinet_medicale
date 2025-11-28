@@ -1,0 +1,53 @@
+<div class="search-filter-card">
+    <div class="row g-3 align-items-end">
+        <!-- Search Input -->
+        <div class="col-md-4">
+            <label for="search" class="form-label">
+                <i class="bi bi-search me-2"></i>
+                Rechercher un patient
+            </label>
+            <input type="text" id="search" class="form-control" placeholder="Nom ou prénom..." [(ngModel)]="searchTerm"
+                (ngModelChange)="onSearchChange()" />
+        </div>
+
+        <!-- Gender Filter -->
+        <div class="col-md-2">
+            <label for="gender" class="form-label">
+                <i class="bi bi-gender-ambiguous me-2"></i>
+                Sexe
+            </label>
+            <select id="gender" class="form-select" [(ngModel)]="gender" (ngModelChange)="onGenderChange()">
+                <option value="">Tous</option>
+                <option value="M">Homme</option>
+                <option value="F">Femme</option>
+            </select>
+        </div>
+
+        <!-- Date From -->
+        <div class="col-md-2">
+            <label for="dateFrom" class="form-label">
+                <i class="bi bi-calendar-event me-2"></i>
+                Date début
+            </label>
+            <input type="date" id="dateFrom" class="form-control" [(ngModel)]="dateFrom"
+                (ngModelChange)="onDateChange()" />
+        </div>
+
+        <!-- Date To -->
+        <div class="col-md-2">
+            <label for="dateTo" class="form-label">
+                <i class="bi bi-calendar-check me-2"></i>
+                Date fin
+            </label>
+            <input type="date" id="dateTo" class="form-control" [(ngModel)]="dateTo" (ngModelChange)="onDateChange()" />
+        </div>
+
+        <!-- Clear Button -->
+        <div class="col-md-2">
+            <button type="button" class="btn btn-clear w-100" (click)="clearFilters()">
+                <i class="bi bi-x-circle me-2"></i>
+                Réinitialiser
+            </button>
+        </div>
+    </div>
+</div>

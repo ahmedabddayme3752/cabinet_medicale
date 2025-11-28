@@ -1,0 +1,243 @@
+.patient-list-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding-bottom: 3rem;
+}
+
+.header-section {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+
+  i {
+    color: #667eea;
+  }
+}
+
+.page-subtitle {
+  color: #718096;
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+.btn-add {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+  }
+}
+
+.patient-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.patient-card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.patient-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+
+  i {
+    color: white;
+  }
+
+  &.male {
+    background: rgba(59, 130, 246, 0.3);
+  }
+
+  &.female {
+    background: rgba(236, 72, 153, 0.3);
+  }
+}
+
+.patient-info {
+  flex: 1;
+  color: white;
+}
+
+.patient-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: white;
+}
+
+.patient-age {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-right: 0.75rem;
+}
+
+.gender-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+
+  &.male {
+    background: rgba(59, 130, 246, 0.3);
+  }
+
+  &.female {
+    background: rgba(236, 72, 153, 0.3);
+  }
+}
+
+.patient-card-body {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: start;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+
+  i {
+    color: #667eea;
+    font-size: 1.1rem;
+    margin-top: 2px;
+  }
+
+  .label {
+    color: #718096;
+    font-weight: 500;
+  }
+
+  .value {
+    text-align: right;
+    color: #2d3748;
+    font-weight: 600;
+  }
+
+  &.remarks {
+    grid-template-columns: auto 1fr;
+
+    .value {
+      text-align: left;
+      font-weight: 400;
+      font-style: italic;
+      color: #4a5568;
+      grid-column: 1 / -1;
+      margin-top: 0.25rem;
+    }
+  }
+}
+
+.patient-card-footer {
+  padding: 1rem 1.5rem;
+  background: #f7fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.btn-details {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    color: white;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+  i {
+    font-size: 4rem;
+    color: #cbd5e0;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #718096;
+  }
+}
+
+.patient-count {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 1.8rem;
+  }
+
+  .btn-add {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}

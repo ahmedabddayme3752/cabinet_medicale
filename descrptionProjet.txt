@@ -1,0 +1,58 @@
+1
+Projet : Application de Gestion des Malades
+Pour Cabinet Médical
+Contexte :
+Vous êtes chargé de développer une application web pour faciliter la gestion des patients dans
+un cabinet médical. L'application doit permettre aux utilisateurs (secrétaires, médecins) de
+consulter, ajouter, modifier et suivre les patients, ainsi que leurs rendez-vous et traitements.
+Objectifs pédagogiques :
+1. Créer une interface utilisateur claire et intuitive.
+2. Implémenter des formulaires réactifs pour l’ajout et la modification des patients.
+3. Gérer efficacement les rendez-vous et traitements.
+4. Utiliser JSON Server pour simuler une API de gestion des patients.
+Fonctionnalités à réaliser :
+1. Page d’accueil : Liste des patients
+o Afficher tous les patients avec :
+ Nom, prénom
+ Date de naissance
+ Sexe
+ Numéro de téléphone
+ Date du dernier rendez-vous
+ Remarques éventuelles
+o Bouton pour consulter les détails du patient.
+2. Ajout de patient
+o Formulaire pour ajouter un patient avec :
+ Nom, prénom, date de naissance, sexe
+ Adresse, téléphone
+Matière : Projet Angualr
+Classe : 3GT TST
+Enseignante : Mme INES Jemal
+Année universitaire : 2025/2026
+2
+ Antécédents médicaux, remarques
+o Validation des champs obligatoires.
+3. Détails du patient
+o Affiche toutes les informations du patient.
+o Liste des rendez-vous passés et futurs.
+o Liste des traitements prescrits.
+o Bouton pour modifier les informations du patient.
+4. Modification d’un patient
+o Permet de mettre à jour les informations d’un patient existant.
+5. Gestion des rendez-vous
+o Ajouter un rendez-vous pour un patient.
+o Visualiser les rendez-vous programmés.
+o Marquer un rendez-vous comme effectué ou annulé.
+6. Recherche et filtres
+o Rechercher un patient par nom ou prénom.
+o Filtrer par date de rendez-vous, sexe, ou statut médical.
+Technologies à utiliser
+ Front-end : Angular, Bootstrap, jQuery (pour certaines interactions comme les filtres
+dynamiques ou l’affichage des tableaux)
+ Back-end simulé : JSON Server pour stocker les données des patients, rendez-vous et
+traitements.
+ Stockage : JSON (simulé via JSON Server)
+Livrable
+ Code source de l'application.
+ Documentation technique décrivant l'architecture de l'application et les choix
+techniques.
+ Instructions sur la mise en place de l'application et son utilisation.

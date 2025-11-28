@@ -1,0 +1,317 @@
+.patient-details-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem 0 3rem;
+}
+
+.details-header {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.btn-back {
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    color: #4a5568;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: #edf2f7;
+        color: #2d3748;
+    }
+}
+
+.patient-header-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1;
+}
+
+.patient-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+
+    &.male {
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    }
+
+    &.female {
+        background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+}
+
+.patient-name-large {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.25rem;
+}
+
+.patient-meta {
+    color: #718096;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        color: white;
+    }
+}
+
+.info-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    height: 100%;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+
+    i {
+        color: #667eea;
+    }
+}
+
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    .label {
+        font-size: 0.85rem;
+        color: #718096;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .value {
+        font-size: 1rem;
+        color: #2d3748;
+        font-weight: 500;
+
+        &.remarks-text {
+            font-style: italic;
+            color: #4a5568;
+        }
+    }
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+
+    &:last-child {
+        padding-bottom: 0;
+    }
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2rem;
+    top: 0.5rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #667eea;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #667eea;
+
+    &.past {
+        background: #48bb78;
+        box-shadow: 0 0 0 2px #48bb78;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 12px;
+        transform: translateX(-50%);
+        width: 2px;
+        height: calc(100% + 2rem);
+        background: #e2e8f0;
+    }
+}
+
+.timeline-item:last-child .timeline-marker::before {
+    display: none;
+}
+
+.timeline-content {
+    background: #f7fafc;
+    padding: 1.25rem;
+    border-radius: 12px;
+    border-left: 3px solid #667eea;
+}
+
+.appointment-date {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.appointment-reason {
+    color: #4a5568;
+    margin-bottom: 0.25rem;
+}
+
+.appointment-notes {
+    font-size: 0.9rem;
+    color: #718096;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+.status-badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+
+    &.badge-success {
+        background: #c6f6d5;
+        color: #22543d;
+    }
+
+    &.badge-primary {
+        background: #bee3f8;
+        color: #2c5282;
+    }
+
+    &.badge-danger {
+        background: #fed7d7;
+        color: #742a2a;
+    }
+}
+
+.treatment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.treatment-item {
+    background: #f7fafc;
+    padding: 1.25rem;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+}
+
+.treatment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.treatment-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0;
+}
+
+.treatment-dosage {
+    background: #667eea;
+    color: white;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.treatment-details {
+    p {
+        margin-bottom: 0.5rem;
+        color: #4a5568;
+        font-size: 0.95rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        strong {
+            color: #2d3748;
+        }
+    }
+
+    .treatment-notes {
+        font-style: italic;
+        color: #718096;
+        margin-top: 0.75rem;
+    }
+}
+
+.empty-message {
+    text-align: center;
+    padding: 2rem;
+    color: #718096;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .details-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .patient-header-info {
+        width: 100%;
+    }
+
+    .btn-edit {
+        width: 100%;
+        text-align: center;
+    }
+}
