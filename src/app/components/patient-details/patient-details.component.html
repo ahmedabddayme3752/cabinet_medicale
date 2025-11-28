@@ -29,8 +29,21 @@
                 </div>
                 <div>
                     <h1 class="patient-name-large">{{ patient.firstName }} {{ patient.lastName }}</h1>
-                    <p class="patient-meta">{{ getAge(patient.dateOfBirth) }} ans • {{ patient.gender === 'M' ? 'Homme'
-                        : 'Femme' }}</p>
+                    <div class="patient-meta">
+                        <span class="meta-badge">
+                            <i class="bi bi-calendar3"></i>
+                            {{ getAge(patient.dateOfBirth) }} ans
+                        </span>
+                        <span class="meta-badge">
+                            <i class="bi"
+                                [ngClass]="patient.gender === 'M' ? 'bi-gender-male' : 'bi-gender-female'"></i>
+                            {{ patient.gender === 'M' ? 'Homme' : 'Femme' }}
+                        </span>
+                        <span class="meta-badge" *ngIf="patient.phone">
+                            <i class="bi bi-telephone-fill"></i>
+                            {{ patient.phone }}
+                        </span>
+                    </div>
                 </div>
             </div>
             <a [routerLink]="['/edit-patient', patient.id]" class="btn btn-edit">
