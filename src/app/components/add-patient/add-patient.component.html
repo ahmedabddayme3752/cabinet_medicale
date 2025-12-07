@@ -1,134 +1,299 @@
 <div class="add-patient-container">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="form-card">
-                    <div class="form-header">
-                        <h1 class="form-title">
-                            <i class="bi bi-person-plus-fill me-3"></i>
-                            Ajouter un Nouveau Patient
-                        </h1>
-                        <p class="form-subtitle">Remplissez les informations du patient</p>
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <a routerLink="/">Home</a>
+        <span class="separator">></span>
+        <span>Add patient</span>
+    </nav>
+
+    <!-- Page Title -->
+    <h1 class="page-title">Add patient</h1>
+
+    <!-- Success Message -->
+    <div *ngIf="success" class="alert alert-success" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        Patient ajouté avec succès! Redirection en cours...
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        {{ error }}
+    </div>
+
+    <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+        <div class="form-wrapper">
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step-item" [class.completed]="currentStep > 1" [class.active]="currentStep === 1">
+                    <div class="step-number">
+                        <i *ngIf="currentStep > 1" class="bi bi-check"></i>
+                        <span *ngIf="currentStep <= 1">1</span>
+                    </div>
+                    <div class="step-label">Personal details</div>
+                </div>
+
+                <div class="step-item" [class.completed]="currentStep > 2" [class.active]="currentStep === 2">
+                    <div class="step-number">
+                        <i *ngIf="currentStep > 2" class="bi bi-check"></i>
+                        <span *ngIf="currentStep <= 2">2</span>
+                    </div>
+                    <div class="step-label">Medical details</div>
+                </div>
+
+                <div class="step-item" [class.completed]="currentStep > 3" [class.active]="currentStep === 3">
+                    <div class="step-number">
+                        <i *ngIf="currentStep > 3" class="bi bi-check"></i>
+                        <span *ngIf="currentStep <= 3">3</span>
+                    </div>
+                    <div class="step-label">Address details</div>
+                </div>
+
+                <div class="step-item" [class.completed]="currentStep > 4" [class.active]="currentStep === 4">
+                    <div class="step-number">
+                        <i *ngIf="currentStep > 4" class="bi bi-check"></i>
+                        <span *ngIf="currentStep <= 4">4</span>
+                    </div>
+                    <div class="step-label">Additional details</div>
+                </div>
+            </div>
+
+            <!-- Form Content -->
+            <div class="form-content">
+                <!-- Step 1: Personal Details -->
+                <div *ngIf="currentStep === 1" class="step-content">
+                    <h2 class="step-title">1. Personal details</h2>
+                    
+                    <div class="form-group">
+                        <label for="firstName" class="form-label required">First Name</label>
+                        <input type="text" id="firstName" class="form-control" formControlName="firstName"
+                            [class.is-invalid]="submitted && f['firstName'].errors"
+                            placeholder="Enter first name" />
+                        <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                            <div *ngIf="f['firstName'].errors['required']">First name is required</div>
+                            <div *ngIf="f['firstName'].errors['minlength']">First name must be at least 2 characters</div>
+                        </div>
                     </div>
 
-                    <!-- Success Message -->
-                    <div *ngIf="success" class="alert alert-success" role="alert">
-                        <i class="bi bi-check-circle-fill me-2"></i>
-                        Patient ajouté avec succès! Redirection en cours...
+                    <div class="form-group">
+                        <label for="lastName" class="form-label required">Last Name</label>
+                        <input type="text" id="lastName" class="form-control" formControlName="lastName"
+                            [class.is-invalid]="submitted && f['lastName'].errors"
+                            placeholder="Enter last name" />
+                        <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                            <div *ngIf="f['lastName'].errors['required']">Last name is required</div>
+                            <div *ngIf="f['lastName'].errors['minlength']">Last name must be at least 2 characters</div>
+                        </div>
                     </div>
 
-                    <!-- Error Message -->
-                    <div *ngIf="error" class="alert alert-danger" role="alert">
-                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                        {{ error }}
+                    <div class="form-group">
+                        <label for="dateOfBirth" class="form-label required">Date of Birth</label>
+                        <input type="date" id="dateOfBirth" class="form-control" formControlName="dateOfBirth"
+                            [class.is-invalid]="submitted && f['dateOfBirth'].errors" />
+                        <div *ngIf="submitted && f['dateOfBirth'].errors" class="invalid-feedback">
+                            <div *ngIf="f['dateOfBirth'].errors['required']">Date of birth is required</div>
+                        </div>
                     </div>
 
-                    <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
-                        <div class="row g-4">
-                            <!-- First Name -->
-                            <div class="col-md-6">
-                                <label for="firstName" class="form-label required">Prénom</label>
-                                <input type="text" id="firstName" class="form-control" formControlName="firstName"
-                                    [class.is-invalid]="submitted && f['firstName'].errors"
-                                    placeholder="Entrez le prénom" />
-                                <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['firstName'].errors['required']">Le prénom est requis</div>
-                                    <div *ngIf="f['firstName'].errors['minlength']">Le prénom doit contenir au moins 2
-                                        caractères</div>
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label for="gender" class="form-label required">Gender</label>
+                        <select id="gender" class="form-select" formControlName="gender"
+                            [class.is-invalid]="submitted && f['gender'].errors">
+                            <option value="">Select gender</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                        <div *ngIf="submitted && f['gender'].errors" class="invalid-feedback">
+                            <div *ngIf="f['gender'].errors['required']">Gender is required</div>
+                        </div>
+                    </div>
 
-                            <!-- Last Name -->
-                            <div class="col-md-6">
-                                <label for="lastName" class="form-label required">Nom</label>
-                                <input type="text" id="lastName" class="form-control" formControlName="lastName"
-                                    [class.is-invalid]="submitted && f['lastName'].errors"
-                                    placeholder="Entrez le nom" />
-                                <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['lastName'].errors['required']">Le nom est requis</div>
-                                    <div *ngIf="f['lastName'].errors['minlength']">Le nom doit contenir au moins 2
-                                        caractères</div>
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label for="phone" class="form-label required">Phone</label>
+                        <input type="tel" id="phone" class="form-control" formControlName="phone"
+                            [class.is-invalid]="submitted && f['phone'].errors" 
+                            placeholder="+216 XX XXX XXX" />
+                        <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                            <div *ngIf="f['phone'].errors['required']">Phone is required</div>
+                            <div *ngIf="f['phone'].errors['pattern']">Invalid phone format</div>
+                        </div>
+                    </div>
+                </div>
 
-                            <!-- Date of Birth -->
-                            <div class="col-md-6">
-                                <label for="dateOfBirth" class="form-label required">Date de naissance</label>
-                                <input type="date" id="dateOfBirth" class="form-control" formControlName="dateOfBirth"
-                                    [class.is-invalid]="submitted && f['dateOfBirth'].errors" />
-                                <div *ngIf="submitted && f['dateOfBirth'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['dateOfBirth'].errors['required']">La date de naissance est requise
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Step 2: Medical Details -->
+                <div *ngIf="currentStep === 2" class="step-content">
+                    <h2 class="step-title">2. Medical details</h2>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Summary - Patient's overall health</label>
+                        <div class="health-status-group">
+                            <button type="button" class="health-status-btn" 
+                                [class.active]="overallHealth === 'Very poor'"
+                                (click)="overallHealth = 'Very poor'">
+                                <i class="bi bi-emoji-frown"></i>
+                                <span>Very poor</span>
+                            </button>
+                            <button type="button" class="health-status-btn"
+                                [class.active]="overallHealth === 'Poor'"
+                                (click)="overallHealth = 'Poor'">
+                                <i class="bi bi-emoji-neutral"></i>
+                                <span>Poor</span>
+                            </button>
+                            <button type="button" class="health-status-btn"
+                                [class.active]="overallHealth === 'Fair'"
+                                (click)="overallHealth = 'Fair'">
+                                <i class="bi bi-emoji-smile"></i>
+                                <span>Fair</span>
+                            </button>
+                            <button type="button" class="health-status-btn"
+                                [class.active]="overallHealth === 'Good'"
+                                (click)="overallHealth = 'Good'">
+                                <i class="bi bi-emoji-laughing"></i>
+                                <span>Good</span>
+                            </button>
+                        </div>
+                    </div>
 
-                            <!-- Gender -->
-                            <div class="col-md-6">
-                                <label for="gender" class="form-label required">Sexe</label>
-                                <select id="gender" class="form-select" formControlName="gender"
-                                    [class.is-invalid]="submitted && f['gender'].errors">
-                                    <option value="">Sélectionnez le sexe</option>
-                                    <option value="M">Homme</option>
-                                    <option value="F">Femme</option>
-                                </select>
-                                <div *ngIf="submitted && f['gender'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['gender'].errors['required']">Le sexe est requis</div>
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label for="gpName" class="form-label">Patient's GP</label>
+                        <input type="text" id="gpName" class="form-control" 
+                            [(ngModel)]="gpName" [ngModelOptions]="{standalone: true}"
+                            placeholder="Enter GP name" />
+                    </div>
 
-                            <!-- Phone -->
-                            <div class="col-md-6">
-                                <label for="phone" class="form-label required">Téléphone</label>
-                                <input type="tel" id="phone" class="form-control" formControlName="phone"
-                                    [class.is-invalid]="submitted && f['phone'].errors" placeholder="+216 XX XXX XXX" />
-                                <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['phone'].errors['required']">Le téléphone est requis</div>
-                                    <div *ngIf="f['phone'].errors['pattern']">Format de téléphone invalide</div>
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label for="gpPhone" class="form-label">GP's telephone</label>
+                        <div class="phone-input-group">
+                            <select class="country-code" [(ngModel)]="gpCountryCode" [ngModelOptions]="{standalone: true}">
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+216">🇹🇳 +216</option>
+                                <option value="+33">🇫🇷 +33</option>
+                            </select>
+                            <input type="tel" id="gpPhone" class="form-control" 
+                                [(ngModel)]="gpPhone" [ngModelOptions]="{standalone: true}"
+                                placeholder="Enter phone number" />
+                        </div>
+                    </div>
 
-                            <!-- Address -->
-                            <div class="col-md-6">
-                                <label for="address" class="form-label">Adresse</label>
-                                <input type="text" id="address" class="form-control" formControlName="address"
-                                    placeholder="Entrez l'adresse" />
-                            </div>
+                    <div class="form-group">
+                        <label class="form-label">Does the patient have any health conditions?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="hasConditions" value="false" 
+                                    [checked]="!hasHealthConditions"
+                                    (change)="hasHealthConditions = false; healthConditions = []" />
+                                <span>No</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="hasConditions" value="true" 
+                                    [checked]="hasHealthConditions"
+                                    (change)="hasHealthConditions = true" />
+                                <span>Yes</span>
+                            </label>
+                        </div>
+                    </div>
 
-                            <!-- Medical History -->
-                            <div class="col-12">
-                                <label for="medicalHistory" class="form-label">Antécédents médicaux</label>
-                                <textarea id="medicalHistory" class="form-control" formControlName="medicalHistory"
-                                    rows="3" placeholder="Décrivez les antécédents médicaux..."></textarea>
+                    <div class="form-group" *ngIf="hasHealthConditions">
+                        <label for="conditions" class="form-label">Add conditions</label>
+                        <div class="tag-input-group">
+                            <div class="tags-container">
+                                <span *ngFor="let condition of healthConditions" class="tag">
+                                    {{ condition }}
+                                    <button type="button" class="tag-remove" (click)="removeCondition(condition)">
+                                        <i class="bi bi-x"></i>
+                                    </button>
+                                </span>
                             </div>
-
-                            <!-- Remarks -->
-                            <div class="col-12">
-                                <label for="remarks" class="form-label">Remarques</label>
-                                <textarea id="remarks" class="form-control" formControlName="remarks" rows="2"
-                                    placeholder="Remarques éventuelles..."></textarea>
+                            <div class="tag-input-wrapper">
+                                <input type="text" id="conditions" class="form-control tag-input" 
+                                    [(ngModel)]="newCondition" [ngModelOptions]="{standalone: true}"
+                                    (keyup.enter)="addCondition()"
+                                    placeholder="Type and press Enter" />
+                                <button type="button" class="btn-add-tag" (click)="addCondition()">
+                                    <i class="bi bi-plus"></i>
+                                </button>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- Form Actions -->
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-cancel" (click)="onCancel()" [disabled]="loading">
-                                <i class="bi bi-x-circle me-2"></i>
-                                Annuler
-                            </button>
-                            <button type="submit" class="btn btn-submit" [disabled]="loading">
-                                <span *ngIf="!loading">
-                                    <i class="bi bi-check-circle me-2"></i>
-                                    Ajouter le Patient
-                                </span>
-                                <span *ngIf="loading">
-                                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
-                                    Ajout en cours...
-                                </span>
-                            </button>
-                        </div>
-                    </form>
+                <!-- Step 3: Address Details -->
+                <div *ngIf="currentStep === 3" class="step-content">
+                    <h2 class="step-title">3. Address details</h2>
+                    
+                    <div class="form-group">
+                        <label for="street" class="form-label">Street</label>
+                        <input type="text" id="street" class="form-control" formControlName="street"
+                            placeholder="Enter street address" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" id="city" class="form-control" formControlName="city"
+                            placeholder="Enter city" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postalCode" class="form-label">Postal Code</label>
+                        <input type="text" id="postalCode" class="form-control" formControlName="postalCode"
+                            placeholder="Enter postal code" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" id="country" class="form-control" formControlName="country"
+                            placeholder="Enter country" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address" class="form-label">Full Address (Alternative)</label>
+                        <textarea id="address" class="form-control" formControlName="address" rows="3"
+                            placeholder="Or enter full address here..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Step 4: Additional Details -->
+                <div *ngIf="currentStep === 4" class="step-content">
+                    <h2 class="step-title">4. Additional details</h2>
+                    
+                    <div class="form-group">
+                        <label for="medicalHistory" class="form-label">Medical History</label>
+                        <textarea id="medicalHistory" class="form-control" formControlName="medicalHistory"
+                            rows="4" placeholder="Describe medical history..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remarks" class="form-label">Remarks</label>
+                        <textarea id="remarks" class="form-control" formControlName="remarks" rows="3"
+                            placeholder="Additional remarks..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-back" (click)="previousStep()" 
+                        [disabled]="currentStep === 1 || loading">
+                        <i class="bi bi-arrow-left"></i>
+                        BACK
+                    </button>
+                    <button *ngIf="currentStep < totalSteps" type="button" class="btn btn-continue" 
+                        (click)="nextStep()" [disabled]="loading">
+                        CONTINUE
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                    <button *ngIf="currentStep === totalSteps" type="submit" class="btn btn-continue" 
+                        [disabled]="loading">
+                        <span *ngIf="!loading">
+                            SUBMIT
+                            <i class="bi bi-check"></i>
+                        </span>
+                        <span *ngIf="loading">
+                            <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                            Submitting...
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>

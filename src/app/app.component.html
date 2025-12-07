@@ -1,35 +1,60 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">
-      <i class="bi bi-hospital-fill me-2"></i>
-      Cabinet Médical
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-            <i class="bi bi-people-fill me-1"></i>
-            Patients
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/appointments" routerLinkActive="active">
-            <i class="bi bi-calendar-check-fill me-1"></i>
-            Rendez-vous
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn-add-nav" routerLink="/add-patient">
-            <i class="bi bi-person-plus-fill me-1"></i>
-            Nouveau Patient
-          </a>
-        </li>
-      </ul>
+<div class="app-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="bi bi-plus-circle-fill"></i>
+        </div>
+        <span class="logo-text">Cabinet</span>
+      </div>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <a class="nav-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="bi bi-house-fill"></i>
+        <span>Home</span>
+      </a>
+      
+      <a class="nav-item" routerLink="/appointments" routerLinkActive="active">
+        <i class="bi bi-calendar-check-fill"></i>
+        <span>Rendez-vous</span>
+      </a>
+      
+      <div class="nav-section">
+        <div class="nav-section-title">Gestion des Patients</div>
+        <a class="nav-item" routerLink="/add-patient" routerLinkActive="active">
+          <i class="bi bi-person-plus-fill"></i>
+          <span>Ajouter un patient</span>
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Top Header -->
+    <header class="top-header">
+      <div class="header-right">
+        <div class="header-item">
+          <i class="bi bi-heart-fill"></i>
+          <span></span>
+        </div>
+        <div class="header-item cart-item">
+          <i class="bi bi-cart-fill"></i>
+          <span>Cart</span>
+          <span class="badge">8</span>
+        </div>
+        <div class="header-item user-avatar">
+          <span>Ahmed</span>
+          <div class="avatar-circle">A</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+      <router-outlet></router-outlet>
     </div>
   </div>
-</nav>
-
-<router-outlet></router-outlet>
+</div>

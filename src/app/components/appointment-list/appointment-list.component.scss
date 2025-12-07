@@ -1,42 +1,76 @@
 .appointment-list-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
-    padding-bottom: 3rem;
+    background: transparent;
+    padding-bottom: 2rem;
+}
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: #64748b;
+    font-size: 0.9rem;
+
+    a {
+        color: #64748b;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: #10b981;
+        }
+    }
+
+    .separator {
+        color: #cbd5e0;
+    }
 }
 
 .header-section {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 2rem 0;
+    background: transparent;
+    padding: 0;
     margin-bottom: 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
 }
 
 .page-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #1e293b;
-    display: flex;
-    align-items: center;
-
-    i {
-        color: #0891b2;
-    }
+    margin: 0;
 }
 
 .btn-add {
     padding: 0.75rem 1.5rem;
     font-weight: 600;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+    border-radius: 8px;
+    background: #10b981;
     border: none;
-    box-shadow: 0 4px 15px rgba(8, 145, 178, 0.4);
-    transition: all 0.3s ease;
+    color: white;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
 
     &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(8, 145, 178, 0.6);
+        background: #059669;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        color: white;
     }
+}
+
+.content-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .appointments-grid {
