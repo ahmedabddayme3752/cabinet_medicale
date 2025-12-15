@@ -4,6 +4,7 @@ import { AddPatientComponent } from './components/add-patient/add-patient.compon
 import { EditPatientComponent } from './components/edit-patient/edit-patient.component';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { AppointmentListComponent } from './components/appointment-list/appointment-list.component';
+import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
 
 export const routes: Routes = [
     { path: '', component: PatientListComponent },
@@ -11,5 +12,6 @@ export const routes: Routes = [
     { path: 'patient/:id', component: PatientDetailsComponent },
     { path: 'edit-patient/:id', component: EditPatientComponent },
     { path: 'appointments', component: AppointmentListComponent },
+    { path: 'add-appointment', component: AppointmentFormComponent },
     { path: '**', redirectTo: '' }
 ];

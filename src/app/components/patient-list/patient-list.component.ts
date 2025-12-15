@@ -18,6 +18,11 @@ export class PatientListComponent implements OnInit {
   loading = true;
   error = '';
 
+  // Pagination
+  currentPage = 1;
+  itemsPerPage = 9;
+  totalPages = 1;
+
   constructor(private patientService: PatientService) { }
 
   ngOnInit(): void {
@@ -30,6 +35,7 @@ export class PatientListComponent implements OnInit {
       next: (data) => {
         this.patients = data;
         this.filteredPatients = data;
+        this.calculatePagination();
         this.loading = false;
       },
       error: (err) => {
@@ -68,6 +74,8 @@ export class PatientListComponent implements OnInit {
 
       return matches;
     });
+    this.currentPage = 1;
+    this.calculatePagination();
   }
 
   getAge(dateOfBirth: string): number {
@@ -86,4 +94,57 @@ export class PatientListComponent implements OnInit {
     const d = new Date(date);
     return d.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
   }
+
+  calculatePagination(): void {
+    this.totalPages = Math.ceil(this.filteredPatients.length / this.itemsPerPage);
+    if (this.currentPage > this.totalPages && this.totalPages > 0) {
+      this.currentPage = this.totalPages;
+    }
+  }
+
+  getPaginatedPatients(): Patient[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.filteredPatients.slice(start, end);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  getPages(): number[] {
+    const pages: number[] = [];
+    const maxPages = 5;
+    let start = Math.max(1, this.currentPage - Math.floor(maxPages / 2));
+    let end = Math.min(this.totalPages, start + maxPages - 1);
+    
+    if (end - start < maxPages - 1) {
+      start = Math.max(1, end - maxPages + 1);
+    }
+    
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
+
+  // Expose Math to template
+  Math = Math;
 }

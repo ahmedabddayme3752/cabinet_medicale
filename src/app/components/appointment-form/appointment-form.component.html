@@ -1,1 +1,105 @@
-<p>appointment-form works!</p>
+<div class="appointment-form-container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <a routerLink="/">Home</a>
+        <span class="separator">></span>
+        <a routerLink="/appointments">Rendez-vous</a>
+        <span class="separator">></span>
+        <span>Nouveau rendez-vous</span>
+    </nav>
+
+    <!-- Page Title -->
+    <h1 class="page-title">Nouveau rendez-vous</h1>
+
+    <!-- Success Message -->
+    <div *ngIf="success" class="alert alert-success" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        Rendez-vous créé avec succès! Redirection en cours...
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        {{ error }}
+    </div>
+
+    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+        <div class="form-card">
+            <div class="form-content">
+                <!-- Patient Selection -->
+                <div class="form-group">
+                    <label for="patientId" class="form-label required">Patient</label>
+                    <select id="patientId" class="form-select" formControlName="patientId"
+                        [class.is-invalid]="submitted && f['patientId'].errors">
+                        <option value="">Sélectionnez un patient</option>
+                        <option *ngFor="let patient of patients" [value]="patient.id">
+                            {{ patient.firstName }} {{ patient.lastName }} 
+                            ({{ patient.phone }})
+                        </option>
+                    </select>
+                    <div *ngIf="submitted && f['patientId'].errors" class="invalid-feedback">
+                        <div *ngIf="f['patientId'].errors['required']">Le patient est requis</div>
+                    </div>
+                </div>
+
+                <!-- Date -->
+                <div class="form-group">
+                    <label for="date" class="form-label required">Date</label>
+                    <input type="date" id="date" class="form-control" formControlName="date"
+                        [class.is-invalid]="submitted && f['date'].errors"
+                        [min]="getTodayDate()" />
+                    <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+                        <div *ngIf="f['date'].errors['required']">La date est requise</div>
+                    </div>
+                </div>
+
+                <!-- Time -->
+                <div class="form-group">
+                    <label for="time" class="form-label required">Heure</label>
+                    <input type="time" id="time" class="form-control" formControlName="time"
+                        [class.is-invalid]="submitted && f['time'].errors" />
+                    <div *ngIf="submitted && f['time'].errors" class="invalid-feedback">
+                        <div *ngIf="f['time'].errors['required']">L'heure est requise</div>
+                    </div>
+                </div>
+
+                <!-- Reason -->
+                <div class="form-group">
+                    <label for="reason" class="form-label required">Motif</label>
+                    <input type="text" id="reason" class="form-control" formControlName="reason"
+                        [class.is-invalid]="submitted && f['reason'].errors"
+                        placeholder="Ex: Consultation générale, Suivi, Urgence..." />
+                    <div *ngIf="submitted && f['reason'].errors" class="invalid-feedback">
+                        <div *ngIf="f['reason'].errors['required']">Le motif est requis</div>
+                        <div *ngIf="f['reason'].errors['minlength']">Le motif doit contenir au moins 3 caractères</div>
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div class="form-group">
+                    <label for="notes" class="form-label">Notes</label>
+                    <textarea id="notes" class="form-control" formControlName="notes" rows="4"
+                        placeholder="Notes supplémentaires (optionnel)..."></textarea>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-back" (click)="onCancel()" [disabled]="loading">
+                        <i class="bi bi-arrow-left"></i>
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn btn-submit" [disabled]="loading">
+                        <span *ngIf="!loading">
+                            <i class="bi bi-check-circle me-2"></i>
+                            Créer le rendez-vous
+                        </span>
+                        <span *ngIf="loading">
+                            <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                            Création en cours...
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -166,6 +166,15 @@
       "reason": "Contrôle cholestérol",
       "status": "completed",
       "notes": "Résultats en amélioration"
+    },
+    {
+      "id": "25d5",
+      "patientId": "1",
+      "date": "2025-03-03",
+      "time": "05:06",
+      "reason": "Consulation",
+      "notes": "pas de sousics ",
+      "status": "scheduled"
     }
   ],
   "treatments": [

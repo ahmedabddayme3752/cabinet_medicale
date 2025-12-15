@@ -16,13 +16,61 @@
         </div>
     </div>
 
+    <!-- Filters -->
+    <div class="filters-section">
+        <div class="filters-row">
+            <div class="filter-group">
+                <label class="filter-label">Filtrer par date</label>
+                <select class="form-select filter-select" [(ngModel)]="dateFilter" (change)="onDateFilterChange()">
+                    <option value="all">Toutes les dates</option>
+                    <option value="today">Aujourd'hui</option>
+                    <option value="week">Cette semaine</option>
+                    <option value="month">Ce mois</option>
+                    <option value="custom">Date personnalisée</option>
+                </select>
+            </div>
+
+            <div class="filter-group" *ngIf="dateFilter === 'custom'">
+                <label class="filter-label">Du</label>
+                <input type="date" class="form-control filter-input" 
+                    [(ngModel)]="customDateFrom" 
+                    (change)="onCustomDateChange()"
+                    [max]="customDateTo || getTodayDate()" />
+            </div>
+
+            <div class="filter-group" *ngIf="dateFilter === 'custom'">
+                <label class="filter-label">Au</label>
+                <input type="date" class="form-control filter-input" 
+                    [(ngModel)]="customDateTo" 
+                    (change)="onCustomDateChange()"
+                    [min]="customDateFrom" />
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Filtrer par statut</label>
+                <select class="form-select filter-select" [(ngModel)]="statusFilter" (change)="onStatusFilterChange()">
+                    <option value="all">Tous les statuts</option>
+                    <option value="scheduled">Programmé</option>
+                    <option value="completed">Effectué</option>
+                    <option value="cancelled">Annulé</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     <div class="content-wrapper">
         <div *ngIf="loading" class="text-center py-5">
             <div class="spinner-border text-primary" role="status"></div>
         </div>
 
-        <div *ngIf="!loading && appointments.length > 0" class="appointments-grid">
-            <div *ngFor="let appointment of appointments" class="appointment-card">
+        <div *ngIf="!loading && filteredAppointments.length === 0" class="empty-state">
+            <i class="bi bi-calendar-x"></i>
+            <h3>Aucun rendez-vous trouvé</h3>
+            <p>Aucun rendez-vous ne correspond à vos critères de filtrage.</p>
+        </div>
+
+        <div *ngIf="!loading && filteredAppointments.length > 0" class="appointments-grid">
+            <div *ngFor="let appointment of getPaginatedAppointments()" class="appointment-card">
                 <div class="appointment-header">
                     <div>
                         <h3 class="appointment-patient">{{ getPatientName(appointment.patientId) }}</h3>
@@ -45,6 +93,29 @@
                     </button>
                 </div>
             </div>
+        </div>
+
+        <!-- Pagination -->
+        <div *ngIf="!loading && filteredAppointments.length > 0 && totalPages > 1" class="pagination-wrapper">
+            <div class="pagination-info">
+                Affichage de {{ (currentPage - 1) * itemsPerPage + 1 }} à 
+                {{ Math.min(currentPage * itemsPerPage, filteredAppointments.length) }} 
+                sur {{ filteredAppointments.length }} rendez-vous
+            </div>
+            <nav class="pagination">
+                <button class="page-btn" (click)="previousPage()" [disabled]="currentPage === 1">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <button *ngFor="let page of getPages()" 
+                    class="page-btn" 
+                    [class.active]="page === currentPage"
+                    (click)="goToPage(page)">
+                    {{ page }}
+                </button>
+                <button class="page-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </nav>
         </div>
     </div>
 </div>

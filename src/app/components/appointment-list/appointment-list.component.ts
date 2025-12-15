@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { Appointment } from '../../models/appointment.model';
 import { Patient } from '../../models/patient.model';
 import { AppointmentService } from '../../services/appointment.service';
@@ -9,15 +10,27 @@ import { PatientService } from '../../services/patient.service';
 @Component({
   selector: 'app-appointment-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './appointment-list.component.html',
   styleUrl: './appointment-list.component.scss'
 })
 export class AppointmentListComponent implements OnInit {
   appointments: Appointment[] = [];
+  filteredAppointments: Appointment[] = [];
   patients: Patient[] = [];
   loading = true;
   error = '';
+
+  // Pagination
+  currentPage = 1;
+  itemsPerPage = 6;
+  totalPages = 1;
+
+  // Filters
+  dateFilter: string = 'all'; // 'all', 'today', 'week', 'month', 'custom'
+  customDateFrom: string = '';
+  customDateTo: string = '';
+  statusFilter: string = 'all'; // 'all', 'scheduled', 'completed', 'cancelled'
 
   constructor(
     private appointmentService: AppointmentService,
@@ -35,6 +48,7 @@ export class AppointmentListComponent implements OnInit {
         this.appointments = data.sort((a, b) =>
           new Date(a.date).getTime() - new Date(b.date).getTime()
         );
+        this.applyFilters();
         this.loading = false;
       },
       error: (err) => {
@@ -73,6 +87,10 @@ export class AppointmentListComponent implements OnInit {
     });
   }
 
+  getTodayDate(): string {
+    return new Date().toISOString().split('T')[0];
+  }
+
   formatDate(date: string): string {
     const d = new Date(date);
     return d.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -103,4 +121,138 @@ export class AppointmentListComponent implements OnInit {
         return status;
     }
   }
+
+  applyFilters(): void {
+    let filtered = [...this.appointments];
+
+    // Filter by date
+    if (this.dateFilter !== 'all') {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      switch (this.dateFilter) {
+        case 'today':
+          filtered = filtered.filter(apt => {
+            const aptDate = new Date(apt.date);
+            aptDate.setHours(0, 0, 0, 0);
+            return aptDate.getTime() === today.getTime();
+          });
+          break;
+        case 'week':
+          const weekFromNow = new Date(today);
+          weekFromNow.setDate(weekFromNow.getDate() + 7);
+          filtered = filtered.filter(apt => {
+            const aptDate = new Date(apt.date);
+            aptDate.setHours(0, 0, 0, 0);
+            return aptDate >= today && aptDate <= weekFromNow;
+          });
+          break;
+        case 'month':
+          const monthFromNow = new Date(today);
+          monthFromNow.setMonth(monthFromNow.getMonth() + 1);
+          filtered = filtered.filter(apt => {
+            const aptDate = new Date(apt.date);
+            aptDate.setHours(0, 0, 0, 0);
+            return aptDate >= today && aptDate <= monthFromNow;
+          });
+          break;
+        case 'custom':
+          if (this.customDateFrom) {
+            const fromDate = new Date(this.customDateFrom);
+            fromDate.setHours(0, 0, 0, 0);
+            filtered = filtered.filter(apt => {
+              const aptDate = new Date(apt.date);
+              aptDate.setHours(0, 0, 0, 0);
+              return aptDate >= fromDate;
+            });
+          }
+          if (this.customDateTo) {
+            const toDate = new Date(this.customDateTo);
+            toDate.setHours(23, 59, 59, 999);
+            filtered = filtered.filter(apt => {
+              const aptDate = new Date(apt.date);
+              aptDate.setHours(0, 0, 0, 0);
+              return aptDate <= toDate;
+            });
+          }
+          break;
+      }
+    }
+
+    // Filter by status
+    if (this.statusFilter !== 'all') {
+      filtered = filtered.filter(apt => apt.status === this.statusFilter);
+    }
+
+    this.filteredAppointments = filtered;
+    this.currentPage = 1;
+    this.calculatePagination();
+  }
+
+  onDateFilterChange(): void {
+    this.applyFilters();
+  }
+
+  onStatusFilterChange(): void {
+    this.applyFilters();
+  }
+
+  onCustomDateChange(): void {
+    if (this.dateFilter === 'custom') {
+      this.applyFilters();
+    }
+  }
+
+  calculatePagination(): void {
+    this.totalPages = Math.ceil(this.filteredAppointments.length / this.itemsPerPage);
+    if (this.currentPage > this.totalPages && this.totalPages > 0) {
+      this.currentPage = this.totalPages;
+    }
+  }
+
+  getPaginatedAppointments(): Appointment[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.filteredAppointments.slice(start, end);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  getPages(): number[] {
+    const pages: number[] = [];
+    const maxPages = 5;
+    let start = Math.max(1, this.currentPage - Math.floor(maxPages / 2));
+    let end = Math.min(this.totalPages, start + maxPages - 1);
+    
+    if (end - start < maxPages - 1) {
+      start = Math.max(1, end - maxPages + 1);
+    }
+    
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
+
+  // Expose Math to template
+  Math = Math;
 }
