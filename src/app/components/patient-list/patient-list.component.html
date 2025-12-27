@@ -41,7 +41,7 @@
 
         <!-- Patient Cards -->
         <div *ngIf="!loading && filteredPatients.length > 0" class="row g-4">
-            <div *ngFor="let patient of getPaginatedPatients()" class="col-md-6 col-lg-4">
+            <div *ngFor="let patient of getPaginatedPatients()" class="col-xl-3 col-lg-4 col-md-6">
                 <div class="patient-card">
                     <div class="patient-card-header">
                         <div class="patient-avatar" [class.male]="patient.gender === 'M'"
@@ -100,8 +100,8 @@
         <!-- Pagination -->
         <div *ngIf="!loading && filteredPatients.length > 0 && totalPages > 1" class="pagination-wrapper">
             <div class="pagination-info">
-                Affichage de {{ (currentPage - 1) * itemsPerPage + 1 }} à 
-                {{ Math.min(currentPage * itemsPerPage, filteredPatients.length) }} 
+                Affichage de {{ (currentPage - 1) * itemsPerPage + 1 }} à
+                {{ Math.min(currentPage * itemsPerPage, filteredPatients.length) }}
                 sur {{ filteredPatients.length }} patient(s)
                 <span *ngIf="filteredPatients.length !== patients.length">
                     ({{ patients.length }} au total)
@@ -111,9 +111,7 @@
                 <button class="page-btn" (click)="previousPage()" [disabled]="currentPage === 1">
                     <i class="bi bi-chevron-left"></i>
                 </button>
-                <button *ngFor="let page of getPages()" 
-                    class="page-btn" 
-                    [class.active]="page === currentPage"
+                <button *ngFor="let page of getPages()" class="page-btn" [class.active]="page === currentPage"
                     (click)="goToPage(page)">
                     {{ page }}
                 </button>

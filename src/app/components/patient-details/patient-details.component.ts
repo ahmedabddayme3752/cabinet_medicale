@@ -129,4 +129,33 @@ export class PatientDetailsComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/']);
   }
+
+  // Pagination for appointments
+  currentPage = 1;
+  itemsPerPage = 3; // Show 3 appointments per page
+
+  get totalPages(): number {
+    return Math.ceil(this.appointments.length / this.itemsPerPage);
+  }
+
+  getPaginatedAppointments(): Appointment[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.appointments.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  // Expose Math to template
+  protected readonly Math = Math;
 }
+

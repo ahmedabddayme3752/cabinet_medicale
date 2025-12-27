@@ -53,7 +53,7 @@
 
         <div class="row g-4">
             <!-- Patient Information Card -->
-            <div class="col-lg-4">
+            <div class="col-12">
                 <div class="info-card">
                     <h2 class="card-title"><i class="bi bi-person-vcard me-2"></i>Informations Personnelles</h2>
                     <div class="info-list">
@@ -81,36 +81,57 @@
                 </div>
             </div>
 
-            <!-- Appointments and Treatments -->
-            <div class="col-lg-8">
-                <!-- Appointments Card -->
-                <div class="info-card mb-4">
+            <!-- Appointments Card -->
+            <div class="col-12">
+                <div class="info-card">
                     <h2 class="card-title"><i class="bi bi-calendar-check me-2"></i>Rendez-vous</h2>
                     <div *ngIf="appointments.length === 0" class="empty-message">
                         Aucun rendez-vous enregistré
                     </div>
-                    <div *ngIf="appointments.length > 0" class="timeline">
-                        <div *ngFor="let appointment of appointments" class="timeline-item">
-                            <div class="timeline-marker" [class.past]="isPastAppointment(appointment)"></div>
-                            <div class="timeline-content">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div>
-                                        <h4 class="appointment-date">{{ formatDate(appointment.date) }} à {{
-                                            appointment.time }}</h4>
-                                        <p class="appointment-reason">{{ appointment.reason }}</p>
-                                        <p *ngIf="appointment.notes" class="appointment-notes">{{ appointment.notes }}
-                                        </p>
+                    <div *ngIf="appointments.length > 0">
+                        <div class="timeline">
+                            <div *ngFor="let appointment of getPaginatedAppointments()" class="timeline-item">
+                                <div class="timeline-marker" [class.past]="isPastAppointment(appointment)"></div>
+                                <div class="timeline-content">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h4 class="appointment-date">{{ formatDate(appointment.date) }} à {{
+                                                appointment.time }}</h4>
+                                            <p class="appointment-reason">{{ appointment.reason }}</p>
+                                            <p *ngIf="appointment.notes" class="appointment-notes">{{ appointment.notes
+                                                }}
+                                            </p>
+                                        </div>
+                                        <span class="status-badge" [ngClass]="getStatusBadgeClass(appointment.status)">
+                                            {{ getStatusText(appointment.status) }}
+                                        </span>
                                     </div>
-                                    <span class="status-badge" [ngClass]="getStatusBadgeClass(appointment.status)">
-                                        {{ getStatusText(appointment.status) }}
-                                    </span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination Controls -->
+                        <div *ngIf="totalPages > 1" class="d-flex justify-content-between align-items-center mt-4">
+                            <div class="text-muted small">
+                                Page {{ currentPage }} sur {{ totalPages }}
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-secondary" (click)="previousPage()"
+                                    [disabled]="currentPage === 1">
+                                    <i class="bi bi-chevron-left"></i> Précédent
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" (click)="nextPage()"
+                                    [disabled]="currentPage === totalPages">
+                                    Suivant <i class="bi bi-chevron-right"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Treatments Card -->
+            <!-- Treatments Card -->
+            <div class="col-12">
                 <div class="info-card">
                     <h2 class="card-title"><i class="bi bi-capsule me-2"></i>Traitements</h2>
                     <div *ngIf="treatments.length === 0" class="empty-message">
