@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { Appointment } from '../../models/appointment.model';
 import { Patient } from '../../models/patient.model';
 import { AppointmentService } from '../../services/appointment.service';
@@ -9,8 +6,7 @@ import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-appointment-list',
-  standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  standalone: false,
   templateUrl: './appointment-list.component.html',
   styleUrl: './appointment-list.component.scss'
 })
@@ -242,11 +238,11 @@ export class AppointmentListComponent implements OnInit {
     const maxPages = 5;
     let start = Math.max(1, this.currentPage - Math.floor(maxPages / 2));
     let end = Math.min(this.totalPages, start + maxPages - 1);
-    
+
     if (end - start < maxPages - 1) {
       start = Math.max(1, end - maxPages + 1);
     }
-    
+
     for (let i = start; i <= end; i++) {
       pages.push(i);
     }

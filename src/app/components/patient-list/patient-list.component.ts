@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { Patient } from '../../models/patient.model';
 import { PatientService } from '../../services/patient.service';
-import { SearchFilterComponent } from '../search-filter/search-filter.component';
 
 @Component({
   selector: 'app-patient-list',
-  standalone: true,
-  imports: [CommonModule, RouterModule, SearchFilterComponent],
+  standalone: false,
   templateUrl: './patient-list.component.html',
   styleUrl: './patient-list.component.scss'
 })
@@ -134,11 +130,11 @@ export class PatientListComponent implements OnInit {
     const maxPages = 5;
     let start = Math.max(1, this.currentPage - Math.floor(maxPages / 2));
     let end = Math.min(this.totalPages, start + maxPages - 1);
-    
+
     if (end - start < maxPages - 1) {
       start = Math.max(1, end - maxPages + 1);
     }
-    
+
     for (let i = start; i <= end; i++) {
       pages.push(i);
     }

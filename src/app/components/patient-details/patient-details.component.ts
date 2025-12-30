@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from '../../models/patient.model';
 import { Appointment } from '../../models/appointment.model';
 import { Treatment } from '../../models/treatment.model';
@@ -10,8 +9,7 @@ import { TreatmentService } from '../../services/treatment.service';
 
 @Component({
   selector: 'app-patient-details',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
+  standalone: false,
   templateUrl: './patient-details.component.html',
   styleUrl: './patient-details.component.scss'
 })
@@ -158,4 +156,3 @@ export class PatientDetailsComponent implements OnInit {
   // Expose Math to template
   protected readonly Math = Math;
 }
-

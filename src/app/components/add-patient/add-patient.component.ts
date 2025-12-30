@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-add-patient',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './add-patient.component.html',
   styleUrl: './add-patient.component.scss'
 })
@@ -19,7 +17,7 @@ export class AddPatientComponent {
   success = false;
   currentStep = 1;
   totalSteps = 4;
-  
+
   healthConditions: string[] = [];
   newCondition = '';
   hasHealthConditions = false;
@@ -110,7 +108,7 @@ export class AddPatientComponent {
       gpName: this.gpName,
       gpPhone: this.gpPhone,
       healthConditions: this.healthConditions,
-      address: this.patientForm.value.street 
+      address: this.patientForm.value.street
         ? `${this.patientForm.value.street}, ${this.patientForm.value.city}, ${this.patientForm.value.postalCode}, ${this.patientForm.value.country}`
         : this.patientForm.value.address
     };

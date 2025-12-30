@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AppointmentService } from '../../services/appointment.service';
 import { PatientService } from '../../services/patient.service';
 import { Appointment } from '../../models/appointment.model';
@@ -9,8 +8,7 @@ import { Patient } from '../../models/patient.model';
 
 @Component({
   selector: 'app-appointment-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  standalone: false,
   templateUrl: './appointment-form.component.html',
   styleUrl: './appointment-form.component.scss'
 })
